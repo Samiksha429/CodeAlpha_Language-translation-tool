@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Storage for user attributes",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Unique identifier of the authenticated user" },
+        "email": { "type": "string", "description": "Email address of the user" },
+        "displayName": { "type": "string", "description": "Display name of the user" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "ISO timestamp of user profile creation" }
+      },
+      "required": ["userId", "email"]
+    },
+    "HistoryItem": {
+      "title": "Translation History Item",
+      "description": "A translation history trace belonging to a specific user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique record key" },
+        "sourceText": { "type": "string", "description": "Original text inputted for translation" },
+        "translatedText": { "type": "string", "description": "Output translation text" },
+        "sourceLang": { "type": "string", "description": "Name of the source language" },
+        "targetLang": { "type": "string", "description": "Name of the target language" },
+        "tone": { "type": "string", "description": "The linguistic tone or preset requested" },
+        "timestamp": { "type": "integer", "description": "Milliseconds timestamp when created" }
+      },
+      "required": ["id", "sourceText", "translatedText", "sourceLang", "targetLang", "timestamp"]
+    },
+    "SavedItem": {
+      "title": "Saved Translation Item",
+      "description": "A bookmarked translation card saved by the user for active reference",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique record key" },
+        "sourceText": { "type": "string", "description": "Original bookmarked text" },
+        "translatedText": { "type": "string", "description": "Resulting bookmarked translated text" },
+        "sourceLang": { "type": "string", "description": "Name of the source language" },
+        "targetLang": { "type": "string", "description": "Name of the target language" },
+        "timestamp": { "type": "integer", "description": "Milliseconds timestamp when bookmarked" }
+      },
+      "required": ["id", "sourceText", "translatedText", "sourceLang", "targetLang", "timestamp"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Main user collection node"
+    },
+    "users/{userId}/history/{historyId}": {
+      "schema": "HistoryItem",
+      "description": "Subcollection under user containing operational translation logs"
+    },
+    "users/{userId}/saved/{savedId}": {
+      "schema": "SavedItem",
+      "description": "Subcollection under user containing starred translations"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Language Translation Tool",
+  "description": "An elegant, AI-powered multi-language translation assistant supporting translation, tone adjustment, TTS pronunciation guides, vocabulary breakdown, and search grounding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
